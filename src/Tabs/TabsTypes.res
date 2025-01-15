@@ -244,3 +244,124 @@ type sendMessageOptions = {
   /** Send a message to a specific frame identified by frameId instead of all frames in the tab. */
   frameId?: int,
 }
+
+type groupCreateProperties = {
+  /** The window of the new group. Defaults to the current window. */
+  windowId?: int,
+}
+
+type groupCreateOptions = {
+  /** Configurations for creating a group. Cannot be used if groupId is already specified. */
+  createProperties?: groupCreateProperties,
+  /** The ID of the group to add the tabs to. If not specified, a new group will be created. */
+  groupId?: int,
+  /** List of tab IDs to add to the specified group. */
+  tabIds: array<int>,
+}
+
+type highlightInfo = {
+  /** Tab indices to highlight. */
+  tabs: array<int>,
+  /** The window that contains the tabs. */
+  windowId?: int,
+}
+
+type moveProperties = {
+  /** The position to move the window to. Use -1 to place the tab at the end of the window. */
+  index: int,
+  /** Defaults to the window the tab is currently in. */
+  windowId?: int,
+}
+
+type realoadProperties = {
+  /** Whether to bypass local caching. Defaults to false. */
+  bypassCache?: bool,
+}
+
+type updateProperties = {
+  /** Whether the tab should be active. Does not affect whether the window is focused (see windows.update). */
+  active?: bool,
+  /** Whether the tab should be discarded automatically by the browser when resources are low. */
+  autoDiscardable?: bool,
+  /** Adds or removes the tab from the current selection. */
+  highlighted?: bool,
+  /** Whether the tab should be muted. */
+  muted?: bool,
+  /** The ID of the tab that opened this tab. 
+ If specified, the opener tab must be in the same window as this tab. 
+ */
+  openerTabId?: int,
+  /** Whether the tab should be pinned. */
+  pinned?: bool,
+  /** A URL to navigate the tab to. 
+ JavaScript URLs are not supported; use scripting.executeScript instead. 
+ */
+  url?: string,
+}
+
+type activeInfo = {
+  /** The ID of the tab that has become active. */
+  tabId: int,
+  /** The ID of the window the active tab changed inside of. */
+  windowId: int,
+}
+
+type attachInfo = {
+  newPosition: int,
+  newWindowId: int,
+}
+
+type detachInfo = {
+  oldPosition: int,
+  oldWindowId: int,
+}
+
+type highlightedInfo = {
+  tabIds: array<int>,
+  windowId: int,
+}
+
+type moveInfo = {
+  fromIndex: int,
+  fotIndex: int,
+  windowId: int,
+}
+
+type removeInfo = {
+  /** True when the tab was closed because its parent window was closed. */
+  isWindowClosing: bool,
+  /** The window whose tab is closed. */
+  windowId: int,
+}
+
+type changeInfo = {
+  /** The tab's new audible state. */
+  audible?: bool,
+  /** The tab's new auto-discardable state. */
+  autoDiscardable?: bool,
+  /** The tab's new discarded state. */
+  discarded?: bool,
+  /** The tab's new favicon URL. */
+  favIconUrl?: string,
+  /** The tab's new frozen state. */
+  frozen?: bool,
+  /** The tab's new group. */
+  groupId?: int,
+  /** The tab's new muted state and the reason for the change. */
+  mutedInfo?: mutedInfo,
+  /** The tab's new pinned state. */
+  pinned?: bool,
+  /** The tab's loading status. */
+  status?: tabStatus,
+  /** The tab's new title. */
+  title?: string,
+  /** The tab's URL if it has changed. */
+  url?: string,
+}
+
+type zoomChangeInfo = {
+  newZoomFactor: float,
+  oldZoomFactor: float,
+  tabId: int,
+  zoomSettings: zoomSettings,
+}
